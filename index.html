@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="Personal portfolio — a snapshot of who I am, what I build, and where I want to go.">
+  <title>Your Name — Portfolio</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b12;
+      --panel: rgba(17, 23, 35, .76);
+      --text: #f3f5fa;
+      --muted: #9ca8ba;
+      --line: rgba(180, 198, 224, .14);
+      --accent: #a7f3d0;
+      --blue: #8ab4ff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background: radial-gradient(ellipse at 78% 8%, rgba(43, 85, 126, .21), transparent 36%),
+                  radial-gradient(ellipse at 5% 48%, rgba(46, 110, 94, .1), transparent 32%), var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 3px; }
+    .wrap { width: min(1100px, calc(100% - 48px)); margin-inline: auto; }
+    .topbar { height: 78px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+    .brand { font-size: .9rem; font-weight: 700; letter-spacing: .06em; }
+    .brand span { color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 30px; color: var(--muted); font-size: .84rem; }
+    nav a:hover, .text-link:hover { color: var(--accent); }
+    .nav-cta { border: 1px solid var(--line); padding: 9px 14px; border-radius: 6px; color: var(--text); }
+    .hero { min-height: 620px; display: grid; grid-template-columns: 1.25fr .75fr; align-items: center; gap: 60px; padding-block: 90px; }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .17em; font-size: .72rem; font-weight: 700; }
+    h1 { font-size: clamp(3.3rem, 8vw, 6.7rem); line-height: .99; letter-spacing: -.075em; margin: 20px 0 24px; max-width: 730px; }
+    h1 span { color: transparent; -webkit-text-stroke: 1px rgba(243, 245, 250, .72); }
+    .intro { max-width: 570px; color: var(--muted); font-size: 1.08rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 31px; }
+    .button { display: inline-flex; align-items: center; gap: 10px; padding: 12px 17px; border: 1px solid var(--line); border-radius: 6px; font-size: .86rem; font-weight: 650; transition: transform .2s, border-color .2s; }
+    .button:hover { transform: translateY(-2px); border-color: rgba(167, 243, 208, .65); }
+    .button.primary { background: var(--accent); color: #08110f; border-color: var(--accent); }
+    .orb-wrap { display: grid; place-items: center; min-height: 330px; position: relative; }
+    .orb { width: min(290px, 70vw); aspect-ratio: 1; border-radius: 50%; position: relative; border: 1px solid rgba(167, 243, 208, .32); background: radial-gradient(circle at 35% 30%, rgba(138, 180, 255, .21), rgba(15, 28, 43, .15) 45%, transparent 70%); box-shadow: inset 0 0 65px rgba(81, 143, 167, .15), 0 0 80px rgba(57, 118, 134, .1); }
+    .orb::before, .orb::after { content: ""; position: absolute; inset: 12%; border: 1px solid rgba(138, 180, 255, .2); border-radius: 50%; transform: rotate(-32deg) scaleY(.35); }
+    .orb::after { inset: -7%; transform: rotate(38deg) scaleY(.43); border-color: rgba(167, 243, 208, .28); }
+    .orb-core { position: absolute; inset: 36%; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #d2fff0, #61b8a0 35%, #192d37 75%); filter: drop-shadow(0 0 28px rgba(103, 224, 187, .35)); }
+    .orb-label { position: absolute; bottom: 12px; right: -20px; color: var(--muted); font: .7rem ui-monospace, monospace; letter-spacing: .1em; }
+    .scroll-note { color: #738094; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; margin-top: -30px; }
+    section { padding-block: 100px; border-top: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 35px; }
+    h2 { margin: 7px 0 0; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; letter-spacing: -.055em; }
+    .section-note { max-width: 360px; color: var(--muted); font-size: .9rem; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; }
+    .about-copy { color: var(--muted); max-width: 560px; }
+    .about-copy strong { color: var(--text); font-weight: 550; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .fact { padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    .fact small { display: block; color: var(--muted); font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; }
+    .fact b { display: block; margin-top: 5px; font-size: .94rem; }
+    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .project { min-height: 265px; padding: 25px; border: 1px solid var(--line); border-radius: 9px; background: linear-gradient(145deg, rgba(20, 28, 43, .92), rgba(12, 17, 27, .72)); display: flex; flex-direction: column; transition: border-color .2s, transform .2s; }
+    .project:hover { transform: translateY(-3px); border-color: rgba(138, 180, 255, .48); }
+    .project-top { display: flex; justify-content: space-between; align-items: center; color: var(--blue); font: .72rem ui-monospace, monospace; }
+    .project h3 { font-size: 1.3rem; margin: 26px 0 7px; letter-spacing: -.03em; }
+    .project p { color: var(--muted); font-size: .88rem; margin: 0; max-width: 490px; }
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 24px; }
+    .tag { color: #b6c1d2; border: 1px solid var(--line); border-radius: 4px; padding: 4px 8px; font-size: .68rem; }
+    .contact { display: flex; justify-content: space-between; align-items: center; gap: 30px; padding: 34px; border: 1px solid rgba(167, 243, 208, .22); border-radius: 10px; background: linear-gradient(110deg, rgba(26, 52, 51, .4), rgba(17, 23, 35, .65)); }
+    .contact h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+    .contact p { margin: 10px 0 0; color: var(--muted); }
+    footer { display: flex; justify-content: space-between; gap: 20px; color: #778397; font-size: .76rem; padding: 27px 0 34px; }
+    .socials { display: flex; gap: 20px; }
+    .socials a:hover { color: var(--accent); }
+    @media (max-width: 720px) {
+      .wrap { width: min(100% - 36px, 560px); }
+      .topbar { height: 68px; }
+      nav { gap: 16px; } nav a:not(.nav-cta) { display: none; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 20px; padding-block: 78px 70px; }
+      h1 { font-size: clamp(3.5rem, 17vw, 5.5rem); }
+      .orb-wrap { min-height: 260px; }
+      .orb { width: 210px; }
+      .scroll-note { margin-top: 0; }
+      section { padding-block: 72px; }
+      .section-head { display: block; }
+      .section-note { margin-top: 16px; }
+      .about-grid, .projects { grid-template-columns: 1fr; gap: 14px; }
+      .about-grid { gap: 24px; }
+      .project { min-height: 240px; }
+      .contact { align-items: flex-start; flex-direction: column; padding: 25px; }
+      footer { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#top" aria-label="Your Name, home">YOURNAME<span>.</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#work">Selected work</a>
+      <a class="nav-cta" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+      <section class="hero" aria-labelledby="hero-title" style="border:0">
+        <div>
+          <div class="eyebrow">Your role · Your field · Your city</div>
+          <h1 id="hero-title">Curious mind.<br><span>Useful work.</span></h1>
+          <p class="intro">Hi, I’m <strong>Your Name</strong> — an aspiring [role / discipline] who enjoys turning complex challenges into thoughtful, practical solutions. I’m looking for a team where I can learn fast and make a meaningful contribution.</p>
+          <div class="actions">
+            <a class="button primary" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
+            <a class="button" href="mailto:hello@example.com">Get in touch <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="orb-wrap" aria-hidden="true"><div class="orb"><div class="orb-core"></div><div class="orb-label">BUILD / LEARN / REPEAT</div></div></div>
+      </section>
+      <div class="scroll-note">A little about me, a lot about what I make &nbsp; ↓</div>
+
+      <section id="about" aria-labelledby="about-title">
+        <div class="section-head">
+          <div><div class="eyebrow">01 / The person behind the work</div><h2 id="about-title">A bit about me.</h2></div>
+          <p class="section-note">Good work happens when curiosity meets care, clear thinking, and a willingness to keep improving.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>I’m a <strong>[student / recent graduate / early-career professional]</strong> focused on <strong>[your area of interest]</strong>. I like getting to the heart of a problem, exploring different approaches, and making things that are genuinely useful.</p>
+            <p>Outside of projects, I’m currently learning <strong>[something you’re learning]</strong> and always happy to meet people who care about building thoughtful work. I bring a collaborative mindset, attention to detail, and plenty of curiosity to everything I do.</p>
+          </div>
+          <div class="facts" aria-label="Quick facts">
+            <div class="fact"><small>Currently</small><b>[Study / role]</b></div>
+            <div class="fact"><small>Interested in</small><b>[Industry / focus]</b></div>
+            <div class="fact"><small>Based in</small><b>[City, Country]</b></div>
+            <div class="fact"><small>Languages</small><b>[Languages]</b></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" aria-labelledby="work-title">
+        <div class="section-head">
+          <div><div class="eyebrow">02 / Selected work</div><h2 id="work-title">Things I’ve made.</h2></div>
+          <p class="section-note">A few projects that reflect how I think, what I’m learning, and the kind of problems I enjoy solving.</p>
+        </div>
+        <div class="projects">
+          <article class="project">
+            <div class="project-top"><span>PROJECT 01</span><span aria-hidden="true">↗</span></div>
+            <h3>[Project name]</h3>
+            <p>[What was the challenge? What did you build, and what changed as a result? Keep it clear and specific.]</p>
+            <div class="tags"><span class="tag">[Skill / tool]</span><span class="tag">[Skill / tool]</span><span class="tag">[Year]</span></div>
+          </article>
+          <article class="project">
+            <div class="project-top"><span>PROJECT 02</span><span aria-hidden="true">↗</span></div>
+            <h3>[Project name]</h3>
+            <p>[Share your role, the approach you took, and one useful outcome or lesson from the work.]</p>
+            <div class="tags"><span class="tag">[Skill / tool]</span><span class="tag">[Skill / tool]</span><span class="tag">[Year]</span></div>
+          </article>
+          <article class="project">
+            <div class="project-top"><span>PROJECT 03</span><span aria-hidden="true">↗</span></div>
+            <h3>[Project name]</h3>
+            <p>[A personal, academic, or team project is welcome — focus on what you contributed and why it matters.]</p>
+            <div class="tags"><span class="tag">[Skill / tool]</span><span class="tag">[Skill / tool]</span><span class="tag">[Year]</span></div>
+          </article>
+          <article class="project">
+            <div class="project-top"><span>PROJECT 04</span><span aria-hidden="true">↗</span></div>
+            <h3>[Project name]</h3>
+            <p>[Add a link to a demo or write-up, and describe the result in a sentence or two.]</p>
+            <div class="tags"><span class="tag">[Skill / tool]</span><span class="tag">[Skill / tool]</span><span class="tag">[Year]</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-title">
+        <div class="contact">
+          <div><div class="eyebrow">03 / The next chapter</div><h2 id="contact-title">Let’s make something matter.</h2><p>Open to internships, entry-level roles, and good conversations.</p></div>
+          <a class="button primary" href="mailto:hello@example.com">Say hello <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="wrap">
+    <span>© <span id="year">2025</span> Your Name. Built with intention.</span>
+    <div class="socials"><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
